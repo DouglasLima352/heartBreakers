@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="229.0" prefWidth="600.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <Label layoutX="20.0" layoutY="14.0" text="Ficha do Paciente:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="106.0" fitWidth="98.0" layoutX="14.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@olinda.jpg.256x256_q85_box-0,23,735,758_crop_detail.jpg" />
+               </image>
+            </ImageView>
+            <TextField layoutX="123.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
+            <TextField layoutX="123.0" layoutY="115.0" prefHeight="25.0" prefWidth="315.0" style="-fx-background-radius: 5px;" />
+            <TextField layoutX="290.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
+            <TextField layoutX="456.0" layoutY="64.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 5px;" />
+            <ComboBox layoutX="122.0" layoutY="167.0" prefHeight="17.0" prefWidth="150.0" style="-fx-background-color: #ffff; -fx-background-radius: 5px;" />
+            <TextField layoutX="290.0" layoutY="167.0" prefHeight="25.0" prefWidth="149.0" style="-fx-background-radius: 5px;" />
+            <TextField layoutX="456.0" layoutY="167.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5px;" />
+            <DatePicker layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
+            <Label layoutX="127.0" layoutY="47.0" styleClass="lblC" text="Nome">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="290.0" layoutY="47.0" styleClass="lblC" text="CPF">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="456.0" layoutY="47.0" styleClass="lblC" text="RG">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="122.0" layoutY="101.0" styleClass="lblC" text="Endereço">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="456.0" layoutY="101.0" styleClass="lblC" text="Data de Nascimento">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="122.0" layoutY="152.0" styleClass="lblC" text="Sexo">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="290.0" layoutY="152.0" styleClass="lblC" text="Peso">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="456.0" layoutY="152.0" styleClass="lblC" text="Altura">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="57.0" layoutX="539.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logoHB1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="244.0" style="-fx-font-style: #ffff;" text="Prontuário:" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="47.0" layoutY="299.0" prefHeight="42.0" prefWidth="192.0" />
+      <TextArea layoutX="355.0" layoutY="299.0" prefHeight="42.0" prefWidth="192.0" />
+      <TextArea layoutX="47.0" layoutY="373.0" prefHeight="42.0" prefWidth="192.0" />
+      <TextArea layoutX="355.0" layoutY="373.0" prefHeight="42.0" prefWidth="192.0" />
+      <TextArea layoutX="47.0" layoutY="445.0" prefHeight="42.0" prefWidth="192.0" />
+      <TextArea layoutX="355.0" layoutY="445.0" prefHeight="42.0" prefWidth="192.0" />
+      <ComboBox layoutX="47.0" layoutY="527.0" prefHeight="25.0" prefWidth="192.0" style="-fx-background-color: #ffff;" />
+      <TextArea layoutX="355.0" layoutY="527.0" prefHeight="98.0" prefWidth="192.0" />
+      <Label layoutX="95.0" layoutY="284.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="118.0" layoutY="358.0" styleClass="lblC" text="Alergias" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="430.0" styleClass="lblC" text="Exame Físico" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="424.0" layoutY="284.0" styleClass="lblC" text="Histórico" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="440.0" layoutY="358.0" styleClass="lblC" text="CID" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="426.0" layoutY="430.0" styleClass="lblC" text="Conduta" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="416.0" layoutY="512.0" styleClass="lblC" text="Diagnóstico" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="512.0" styleClass="lblC" text="Exames Solicitados" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="90.0" layoutY="559.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Baixar Anexo" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="186.0" layoutY="641.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="302.0" layoutY="641.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
