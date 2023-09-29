@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField layoutX="198.0" layoutY="227.0" prefHeight="34.0" prefWidth="203.0" promptText="CPF" style="-fx-background-radius: 10px;" />
@@ -23,9 +22,9 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="230.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="177.0" fitWidth="255.0" layoutX="215.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../OneDrive/Imagens/logoHB.png" />
+            <Image url="@../../../../../Users/leand/Desktop/logoHB%20(2)%201.png" />
          </image>
       </ImageView>
    </children>
