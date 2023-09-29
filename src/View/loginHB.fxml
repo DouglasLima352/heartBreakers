@@ -12,7 +12,7 @@
    <children>
       <TextField layoutX="198.0" layoutY="227.0" prefHeight="34.0" prefWidth="203.0" promptText="CPF" style="-fx-background-radius: 10px;" />
       <TextField layoutX="198.0" layoutY="283.0" prefHeight="34.0" prefWidth="203.0" promptText="SENHA" style="-fx-background-radius: 10px;" />
-      <Label layoutX="275.0" layoutY="200.0" text="Login" textAlignment="CENTER" textFill="#d7d7d7">
+      <Label layoutX="271.0" layoutY="198.0" text="Login" textAlignment="CENTER" textFill="#d7d7d7">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
@@ -22,7 +22,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <ImageView fitHeight="177.0" fitWidth="255.0" layoutX="215.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="194.0" fitWidth="203.0" layoutX="206.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Users/leand/Desktop/logoHB%20(2)%201.png" />
          </image>
