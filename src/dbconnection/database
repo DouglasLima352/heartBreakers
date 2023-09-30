@@ -1,0 +1,49 @@
+-- Destrui o banco caso já exista
+DROP DATABASE IF EXISTS `heart_breakers`;
+
+-- Cria o Banco de Dados
+CREATE DATABASE `heart_breakers`;
+-- Useo Banco de Dados
+USE `heart_breakers`;
+
+-- Cria a tabela do Doutor(ADM)
+CREATE TABLE `doctor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(11) NOT NULL UNIQUE,
+  `password` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- Inserindo dados na tabela Doutor(ADM)
+INSERT INTO `doctor` (`cpf`, `password`) VALUES
+(11111111111, 12345678),
+(22222222222, 12345678);
+
+-- Criando a tabela dos pacientes
+CREATE TABLE `patient` (
+  `medical_record` int NOT NULL AUTO_INCREMENT,
+  `photo` longblob NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `cpf` int(11) NOT NULL,
+  `rg` int(11) NOT NULL,
+  `birth_date` date NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `cell` int(10) NOT NULL,
+  `weight` float(5) NOT NULL,
+  `height` float(3) NOT NULL,
+  `gender` varchar(9) NOT NULL,
+  `blood_type` varchar(3) NOT NULL,
+  -- Prontuário
+  `cid` varchar(3) NOT NULL,
+  `complaint` varchar(255) NOT NULL,
+  `disease_history` varchar(255) NOT NULL,
+  `allergies` varchar(255) NOT NULL,
+  `conduct` varchar(255) NOT NULL,
+  `physical_state` varchar(255) NOT NULL,
+  `exams` longblob NOT NULL,
+  `diagnostic_hypothesis` varchar(255) NOT NULL,
+  `results` varchar(255) NOT NULL,
+  PRIMARY KEY (`medical_record`)
+);
+
+-- INSERT INTO `patient` (`photo`, `name`, `cpf`, `rg`, `birth_date`, `address`, `cell`, `weight`, `height`, `gender`, `blood_type`, `cid`, `complaint`, `disease_history`, `allergies`, `conduct`, `physical_state`, `exams`, `diagnostic_hypothesis`, `results`) VALUES
