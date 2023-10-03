@@ -7,11 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import Controllers.Controller?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D9D9D9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D9D9D9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="136.0" style="-fx-background-color: #808080;">
          <children>
@@ -25,7 +28,7 @@
                   <Font name="Arial Rounded MT Bold" size="17.0" />
                </font>
             </Button>
-            <Button layoutX="22.0" layoutY="200.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="90.0" style="-fx-background-color: #9A0019; -fx-background-radius: 12px;" text="Sair" textFill="WHITE">
+            <Button layoutX="22.0" layoutY="200.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="90.0" style="-fx-background-color: #9A0019; -fx-background-radius: 12px;" text="Sair" textFill="WHITE" onAction="#closePaciente">
                <font>
                   <Font name="Arial Black" size="13.0" />
                </font>
@@ -33,13 +36,14 @@
          </children>
       </AnchorPane>
       <VBox layoutX="-207.0" layoutY="-90.0" prefHeight="400.0" prefWidth="136.0" style="-fx-background-color: #808080;" />
-      <TextField layoutX="162.0" layoutY="22.0" prefHeight="31.0" prefWidth="321.0" promptText="Pesquisar" style="-fx-background-radius: 10px;" />
-      <ImageView fitHeight="47.0" fitWidth="63.0" layoutX="512.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@logoHB1.png" />
-         </image>
-      </ImageView>
-      <Pane layoutX="161.0" layoutY="93.0" prefHeight="70.0" prefWidth="378.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
+      <TextField fx:id="filterPaciente" layoutX="162.0" layoutY="22.0" prefHeight="31.0" prefWidth="321.0" promptText="Pesquisar" style="-fx-background-radius: 10px;" />
+      <Button layoutX="500.0" layoutY="22.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: #9A0019;-fx-background-radius: 10px;" text="Pesquisar" textFill="WHITE" onAction="#FilterPaciente">
+      	<font>
+           <Font name="Arial Rounded MT Bold" size="12.0" />
+		</font>
+        </Button>
+      <!-- Container que vai o paciente (caso for aceito)  -->
+      <!--<ScrollPane fx:id="paneFilterPaciente" layoutX="161.0" layoutY="93.0" prefHeight="70.0" prefWidth="378.0" style="-fx-background-color: red; -fx-background-radius: 10px;">
          <children>
             <Label layoutX="84.0" layoutY="4.0" text="Nome do Paciente">
                <font>
@@ -62,6 +66,11 @@
                </image>
             </ImageView>
          </children>
-      </Pane>
-   </children>
+      </ScrollPane>-->
+      <ScrollPane layoutY="22.0" prefHeight="576.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="22.0">
+         <content>
+            <VBox prefHeight="555.0" prefWidth="740.0" />
+         </content>
+      </ScrollPane>
+ 	</children>
 </AnchorPane>
