@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS `heart_breakers`;
 
 -- Cria o Banco de Dados
 CREATE DATABASE `heart_breakers`;
--- Useo Banco de Dados
+-- Utilizando o Banco de Dados
 USE `heart_breakers`;
 
 -- Cria a tabela do Doutor(ADM)
@@ -14,7 +14,7 @@ CREATE TABLE `doctor` (
   PRIMARY KEY (`id`)
 );
 
--- Inserindo dados na tabela Doutor(ADM)
+-- Inserindo dados na tabela Doutor(ADM) as credenciais para longin(cpf) e senha(password)
 INSERT INTO `doctor` (`cpf`, `password`) VALUES
 (11111111111, 12345678),
 (22222222222, 12345678);
