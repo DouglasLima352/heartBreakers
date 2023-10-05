@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 public class Main extends Application{
 
 	public void start(Stage primaryStage) throws Exception{
-		Parent root = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("loginHB.fxml"));
 		primaryStage.setTitle("Login");
 	    //primaryStage.getIcons().add(new Image("file:resources/images/docs.png"));
 		primaryStage.setScene(new Scene(root, 600, 400));
