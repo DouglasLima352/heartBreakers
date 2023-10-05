@@ -30,7 +30,59 @@ public class Controller {
 	@FXML
 	private AnchorPane ListaPacientes;
 	
-	
+	public void initialize() throws SQLException {
+		//primeira classe a ser executada assim que a tela é aberta 
+		System.out.print("primeira classe a ser executada assim que a tela é aberta ");
+		
+		try {
+			Connection con = dbconnection.Connect.fazer_conexao();
+			
+			List<Paciente> pacientes = new ArrayList<>();
+			
+			String sql = "select * from patient";
+			PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+			
+            while (rs.next()) {
+				//esta estrutura está pasicamente percorrendo o banco e adicionando esses valores a lista que será usada para exibir um resultado 
+                Paciente paciente = new Paciente();
+
+                paciente.setProntuarionNumber(rs.getInt("medical_record"));
+                paciente.setName(rs.getString("name"));
+                paciente.setPhoto(rs.getString("photo"));
+                pacientes.add(paciente);
+            };
+            
+            Double layoutXPane = 50.0;
+			Double layoutYPane = 14.0;
+			Double widthPane = 500.0;
+			Double heightpane = 70.0;
+			
+            int n = pacientes.size();
+            if(n==0) {
+            	System.out.print("nenhum paciente encontrado");
+            }else {
+            	for (int i = 0; i < n; i++) {
+            	    Pane PacienteList = new Pane();
+            	    PacienteList.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
+            	    PacienteList.setLayoutY(layoutYPane);
+            	    PacienteList.setPrefWidth(widthPane);
+            	    PacienteList.setPrefHeight(heightpane);
+            	    PacienteList.setStyle("-fx-background-color: black; -fx-background-radius: 10px; -fx-alignment: center; -fx-position: absolute");
+            	    
+            	    ListaPacientes.getChildren().add(PacienteList);
+            	    
+            	    layoutYPane = layoutYPane + 80.0;
+            	    System.out.print(layoutXPane + layoutYPane + widthPane + heightpane);
+            	}
+            	//criar uma condicional para não poder pesquisar o mesmo nome mais de uma vez
+            }
+		} catch (SQLException e1) {
+			// TODO: handle exception
+			System.out.print("catch");
+			e1.printStackTrace();
+		}
+	}
 	//classe para fechar a tela - sair 
 	public void closePaciente(ActionEvent event) {
 		
@@ -58,6 +110,7 @@ public class Controller {
                 paciente.setProntuarionNumber(rs.getInt("medical_record"));
                 paciente.setName(rs.getString("name"));
                 paciente.setPhoto(rs.getString("photo"));
+                //Image imagem = new Image(new ByteArrayInputStream(imagemBytes));
                 pacientes.add(paciente);
             };
             
@@ -66,7 +119,7 @@ public class Controller {
 			Double widthPane = 500.0;
 			Double heightpane = 70.0;
 			
-            int n = pacientes.size() + 5;
+            int n = pacientes.size();
             if(n==0) {
             	System.out.print("nenhum paciente encontrado");
             }else {
