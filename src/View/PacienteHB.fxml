@@ -17,7 +17,7 @@
 	<!-- Barra de rolagem com os paciente  -->
       <ScrollPane layoutY="82.0" prefHeight="325.0" prefWidth="600.0">
         <content>
-          <VBox fx:id="ListaPacientes" minHeight="0.0" minWidth="0.0">
+          <AnchorPane fx:id="ListaPacientes" style="-fx-align-itens: center; -fx-background-color: #D9D9D9">
                   <!--<Pane layoutX="102.0" layoutY="14.0" prefHeight="70.0" prefWidth="378.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
                         <Label layoutX="84.0" layoutY="4.0" text="Nome do Paciente">
                            <font>
@@ -40,7 +40,7 @@
                            </image>
                         </ImageView>
                   </Pane>-->
-          	</VBox>
+          	</AnchorPane>
         </content>
       </ScrollPane>
    <!-- barra para pesquisa e botão de sair  -->

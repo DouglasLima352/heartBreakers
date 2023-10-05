@@ -28,11 +28,12 @@ public class Controller {
 	private TextField filterPaciente;
 	
 	@FXML
-	private VBox ListaPacientes;
+	private AnchorPane ListaPacientes;
 	
 	
 	//classe para fechar a tela - sair 
 	public void closePaciente(ActionEvent event) {
+		
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         // Fecha o palco (Stage)
         stage.close();
@@ -60,27 +61,29 @@ public class Controller {
                 pacientes.add(paciente);
             };
             
-            Double layoutXPane = 102.0;
+            Double layoutXPane = 50.0;
 			Double layoutYPane = 14.0;
-			Double widthPane = 50.0;
+			Double widthPane = 500.0;
 			Double heightpane = 70.0;
 			
-            int n = pacientes.size();
+            int n = pacientes.size() + 5;
             if(n==0) {
             	System.out.print("nenhum paciente encontrado");
             }else {
-            	for (int i=0; i<n; i++) {
-            		layoutXPane = layoutXPane + 10.0;
-    		    	Pane PacienteList = new Pane();
-    		    	PacienteList.setLayoutX(layoutXPane);
-    		    	PacienteList.setLayoutY(layoutYPane);
-    		    	PacienteList.setPrefWidth(widthPane);
-    		    	PacienteList.setPrefHeight(heightpane);
-    		    	PacienteList.setStyle("-fx-background-color: black; -fx-background-radius: 10px;");
-    		    	ListaPacientes.getChildren().add(PacienteList);
-    		    	
-    		    	System.out.print(layoutXPane + layoutYPane + widthPane + heightpane);
-    		    }
+            	for (int i = 0; i < n; i++) {
+            	    Pane PacienteList = new Pane();
+            	    PacienteList.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
+            	    PacienteList.setLayoutY(layoutYPane);
+            	    PacienteList.setPrefWidth(widthPane);
+            	    PacienteList.setPrefHeight(heightpane);
+            	    PacienteList.setStyle("-fx-background-color: black; -fx-background-radius: 10px; -fx-alignment: center; -fx-position: absolute");
+            	    
+            	    ListaPacientes.getChildren().add(PacienteList);
+            	    
+            	    layoutYPane = layoutYPane + 80.0;
+            	    System.out.print(layoutXPane + layoutYPane + widthPane + heightpane);
+            	}
+            	//criar uma condicional para não poder pesquisar o mesmo nome mais de uma vez
             }
 		} catch (SQLException e1) {
 			// TODO: handle exception
@@ -88,50 +91,5 @@ public class Controller {
 			e1.printStackTrace();
 		}
 	}
-		/*
-		Connection con = dbconnection.Connect.fazer_conexao();
-		
-		List<Paciente> pacientes = new ArrayList<>();
-		
-		try {
-			String sql = "select * from patient where name=?";
-			PreparedStatement stmt = con.prepareStatement(sql);
-			
-			stmt.setString(1, filterPaciente.getText());
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				
-				//esta estrutura está pasicamente percorrendo o banco e adicionando esses valores a lista que será usada para exibir um resultado 
-                Paciente paciente = new Paciente();
-
-                paciente.setProntuarionNumber(rs.getInt("medical_record"));
-                paciente.setName(rs.getString("name"));
-                paciente.setPhoto(rs.getString("photo"));
-                pacientes.add(paciente);
-            }
-			System.out.printf("Percorrendo o ArrayList (usando o índice)\n");
-			Double layoutXPane = 102.0;
-			Double layoutYPane = 14.0;
-			Double widthPane = 378.0;
-			Double heightpane = 70.0;
-			
-		    int n = pacientes.size();
-		    for (int i=0; i<n; i++) {
-		      //System.out.printf("Posição %d- %s\n", i, pacientes.get(i));
-		    	System.out.printf( "Posição %d- %s\n", i, pacientes.get(i) + " , Número do prontuário: " + pacientes.get(i).getProntuarionNumber() + "pacientes: " + n);
-		    	layoutXPane = layoutXPane + 10.0;
-		    	Pane PacienteList = new Pane();
-		    	PacienteList.setLayoutX(layoutXPane);
-		    	PacienteList.setLayoutY(layoutYPane);
-		    	PacienteList.setPrefWidth(i);
-		    	PacienteList.setStyle("-fx-background-color: black; -fx-background-radius: 10px;");
-		    	ListaPacientes.getChildren().add(PacienteList);
-		    }
-		} catch (Exception ex) {
-			// TODO: handle exception
-			System.out.print("catch");
-			ex.printStackTrace();
-		}*/
-	}
+}
 
