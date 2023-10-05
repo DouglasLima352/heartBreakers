@@ -28,13 +28,13 @@
                            <font>
                               <Font size="13.0" />
                            </font>
-                        </Label>
-                        <Button layoutX="292.0" layoutY="19.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="72.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE">
+                        </Label>-->
+                        <Button layoutX="292.0" layoutY="19.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="72.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE" onAction="#editar">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="12.0" />
                            </font>
                         </Button>
-                        <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                        <!--<ImageView fitHeight="60.0" fitWidth="65.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@olinda.jpg.256x256_q85_box-0,23,735,758_crop_detail.jpg" />
                            </image>

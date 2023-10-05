@@ -38,6 +38,10 @@ public class Controller {
         // Fecha o palco (Stage)
         stage.close();
 	}
+	
+	protected void editar(ActionEvent e) {
+		View.Main.mudarJanela("twiceScene");
+	}
 	//botoão para pesquisar 
 	public void FilterPaciente(ActionEvent event) throws SQLException {
 		try {
