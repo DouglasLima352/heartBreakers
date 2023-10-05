@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.awt.Button;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+
 
 import model.Doctor;// import da classe Doctor
 
@@ -46,18 +47,24 @@ public class ControllerDoctorLogin {
 			//resultado da consulta
 			rs = pst.executeQuery();
 			if (rs.next()) {
-					
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/caminho/para/seu/arquivo/FXML.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
 			}else {
 				System.out.print("Deu ruim");
 			}
 		} catch (Exception e) {
-
-		}
-		
-		
-		
-		
+			System.out.print(e);
+		}	
 	}
+	
+	private void btnLoginActionPerformed(ActionEvent evt) {
+        loginDoctor(evt);
+	}
+	
 }
 
 
