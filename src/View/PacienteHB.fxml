@@ -29,7 +29,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <Button layoutX="292.0" layoutY="19.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="72.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE">
+                        <Button layoutX="292.0" layoutY="19.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="72.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE" onAction="#editar" fx:id="bEditar">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="12.0" />
                            </font>
