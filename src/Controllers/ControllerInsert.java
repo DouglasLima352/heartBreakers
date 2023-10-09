@@ -1,8 +1,8 @@
 package Controllers;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +13,7 @@ import java.util.Date;
 
 import dbconnection.Connect;
 
+import javafx.stage.FileChooser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +27,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 //import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -41,14 +41,10 @@ public class ControllerInsert{
 	private Button bSalvar;
 	
 	@FXML
-	private TextField patientFilter;
-	
-	@FXML
 	private Button bAnexar;
 
 	@FXML
 	private TextField pastaSelecionada;
-
 	
 	PreparedStatement pst = null;
 	ResultSet rs = null;
@@ -70,75 +66,70 @@ public class ControllerInsert{
 	    PreparedStatement stmt = null;
 
 	    try {
-	        connect = dbconnection.Connect.fazer_conexao(); // Conectando ao banco de dados
-
 	        List<Paciente> pacientes = new ArrayList<>();
 
-	        String SQLConnect = "SELECT * FROM patient WHERE name = ?";
+	        connect = dbconnection.Connect.fazer_conexao(); // Conectando ao banco de dados
+	        /*String SQLConnect = "SELECT * FROM patient WHERE name = ?";
 	        stmt = connect.prepareStatement(SQLConnect);
 
-	        stmt.setString(1, patientFilter.getText());
-	        ResultSet result = stmt.executeQuery();
+	        stmt.setString(1, name.getText());
+	        ResultSet result = stmt.executeQuery();*/
+	        
+	        Paciente paciente = new Paciente();
 
-	        while (result.next()) {
-	            Paciente paciente = new Paciente();
-
-	            // Configure os campos do paciente aqui, incluindo conversões de tipo se necessário
-	            // Exemplo:
-	            //paciente.setPhoto(result.getBytes("photo"));
-	            paciente.setName(result.getString("name"));
-	            paciente.setCPF(result.getString("cpf"));
-			    paciente.setRG(result.getString("rg"));
-			    paciente.setBirthDate(result.getString("birth_date"));
-			    paciente.setAddress(result.getString("address"));
-			    paciente.setCell(result.getString("cell"));
-			    paciente.setWeight(result.getString("weight"));
-			    paciente.setHeight(result.getString("height"));
-			    paciente.setGender(result.getString("gender"));
-			    paciente.setBloodType(result.getString("blood_type"));
-			    paciente.setCid(result.getString("cid"));
-			    paciente.setComplaint(result.getString("complaint"));
-			    paciente.setDiseaseHistory(result.getString("disease_history"));
-			    paciente.setAllergies(result.getString("allergies"));
-			    paciente.setConduct(result.getString("conduct"));
-			    paciente.setPhysicalState(result.getString("physical_state"));
-
-	            pacientes.add(paciente);
-	        }
+            paciente.setPhoto(getString("photo"));
+            paciente.setName(getString("name"));
+            paciente.setCPF(getString("cpf"));
+		    paciente.setRG(getString("rg"));
+		    paciente.setBirthDate(getString("birth_date"));
+		    paciente.setAddress(getString("address"));
+		    paciente.setCell(getString("cell"));
+		    paciente.setWeight(getString("weight"));
+		    paciente.setHeight(getString("height"));
+		    paciente.setGender(getString("gender"));
+		    paciente.setBloodType(getString("blood_type"));
+		    paciente.setCid(getString("cid"));
+		    paciente.setComplaint(getString("complaint"));
+		    paciente.setDiseaseHistory(getString("disease_history"));
+		    paciente.setAllergies(getString("allergies"));
+		    paciente.setConduct(getString("conduct"));
+		    paciente.setPhysicalState(getString("physical_state"));
+		    
+		    pacientes.add(paciente);
 
 	        // Agora, vamos inserir os pacientes na tabela 'patient'
 
 	        String SQLInsert = "INSERT INTO patient (photo, name, cpf, rg, birth_date, address, cell, weight, height, gender, blood_type, cid, complaint, disease_history, allergies, conduct, physical_state, exams, diagnostic_hypothesis, results) " +
-	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	        stmt = connect.prepareStatement(SQLInsert);
-
-	        for (Paciente paciente : pacientes) {
+	        
+	        for (Paciente paciente1 : pacientes) {
 	            // Configure os parâmetros do PreparedStatement com base no tipo de dado correto
-	            stmt.setString(1, paciente.getPhoto());
-	            stmt.setString(2, paciente.getName());
-	            stmt.setString(3, paciente.getCPF());
-	            stmt.setString(4, paciente.getRG());
-	            stmt.setString(1, paciente.getPhoto());
-			    stmt.setString(2, paciente.getName());
-			    stmt.setString(3, paciente.getCPF());
-			    stmt.setString(4, paciente.getRG());
-			    stmt.setString(5, paciente.getBirthDate());
-			    stmt.setString(6, paciente.getAddress());
-			    stmt.setString(7, paciente.getCell());
-			    stmt.setString(8, paciente.getWeight());
-			    stmt.setString(9, paciente.getHeight());
-			    stmt.setString(10, paciente.getGender());
-			    stmt.setString(11, paciente.getBloodType());
-			    stmt.setString(12, paciente.getCid());
-			    stmt.setString(13, paciente.getComplaint());
-			    stmt.setString(14, paciente.getDiseaseHistory());
-			    stmt.setString(15, paciente.getAllergies());
-			    stmt.setString(16, paciente.getConduct());
-			    stmt.setString(17, paciente.getPhysicalState());
-			    stmt.setString(18, paciente.getExams());
-			    stmt.setString(19, paciente.getDiagnosticHypothesis());
-			    stmt.setString(20, paciente.getResults());
+	            stmt.setString(1, paciente1.getPhoto());
+	            stmt.setString(2, paciente1.getName());
+	            stmt.setString(3, paciente1.getCPF());
+	            stmt.setString(4, paciente1.getRG());
+	            stmt.setString(1, paciente1.getPhoto());
+			    stmt.setString(2, paciente1.getName());
+			    stmt.setString(3, paciente1.getCPF());
+			    stmt.setString(4, paciente1.getRG());
+			    stmt.setString(5, paciente1.getBirthDate());
+			    stmt.setString(6, paciente1.getAddress());
+			    stmt.setString(7, paciente1.getCell());
+			    stmt.setString(8, paciente1.getWeight());
+			    stmt.setString(9, paciente1.getHeight());
+			    stmt.setString(10, paciente1.getGender());
+			    stmt.setString(11, paciente1.getBloodType());
+			    stmt.setString(12, paciente1.getCid());
+			    stmt.setString(13, paciente1.getComplaint());
+			    stmt.setString(14, paciente1.getDiseaseHistory());
+			    stmt.setString(15, paciente1.getAllergies());
+			    stmt.setString(16, paciente1.getConduct());
+			    stmt.setString(17, paciente1.getPhysicalState());
+			    stmt.setString(18, paciente1.getExams());
+			    stmt.setString(19, paciente1.getDiagnosticHypothesis());
+			    stmt.setString(20, paciente1.getResults());
 
 	            // Execute a instrução SQL para inserir o paciente
 	            stmt.executeUpdate();
@@ -172,6 +163,12 @@ public class ControllerInsert{
 	}
 
 	
+	private String getString(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	public void voltar(ActionEvent event) {
 			try {
 				/*Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
