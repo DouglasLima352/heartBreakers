@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 //import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -41,8 +43,27 @@ public class ControllerInsert{
 	@FXML
 	private TextField patientFilter;
 	
+	@FXML
+	private Button bAnexar;
+
+	@FXML
+	private TextField pastaSelecionada;
+
+	
 	PreparedStatement pst = null;
 	ResultSet rs = null;
+	
+	public void bChooser(ActionEvent event) {
+		FileChooser selecionarArquivo = new FileChooser();//cria a instancia do FileChooser
+		selecionarArquivo.setTitle("Selecione um arquivo"); //titulo da janela que vai abrir
+	    File arquivoSelecionado = selecionarArquivo.showOpenDialog(null);
+	    if (arquivoSelecionado != null) {
+	        System.out.println("Arquivo selecionado: " + arquivoSelecionado.getAbsolutePath());
+	        pastaSelecionada.setText(arquivoSelecionado.getAbsolutePath());
+	    } else {
+	        System.out.println("Nenhum arquivo selecionado.");
+	    }
+	}
 	
 	public void salvar (ActionEvent event) {
 	    Connection connect = null;
