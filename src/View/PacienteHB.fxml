@@ -57,11 +57,11 @@
                   <Font name="Arial Black" size="13.0" />
                </font>
             </Button>
-            <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="510.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="/img/logo.png" />
-                </image>
-            </ImageView>
+            <Button fx:id="buttonNovo" layoutX="500.0" layoutY="28.0" prefHeight="28.0" prefWidth="60.0" style="-fx-background-color: #9A0019; -fx-background-radius: 12px;" text="Novo" textFill="WHITE" onAction="#novoPaciente">
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </Button>
          </children>
 	</Pane>
       
