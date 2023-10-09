@@ -10,15 +10,15 @@ import javafx.stage.Modality;
 public class Main extends Application{
 
 	
-	public void start(Stage primaryStage) throws Exception{
-		Parent root = FXMLLoader.load(getClass().getResource("LoginHB.fxml"));//carrega o arquivo fxml.
-		primaryStage.setTitle("Login");// nomeia a janela.
+	public void start(Stage windowLogin) throws Exception{
+		Parent loginFX = FXMLLoader.load(getClass().getResource("LoginHB.fxml"));//carrega o arquivo fxml.
+		windowLogin.setTitle("Login");// nomeia a janela.
 	    //primaryStage.getIcons().add(new Image("file:resources/images/docs.png"));
-		primaryStage.setScene(new Scene(root, 600, 400));//seta o fxml dentro do stage.
+		windowLogin.setScene(new Scene(loginFX, 600, 400));//seta o fxml dentro do stage.
 		//root.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		//primaryStage.initModality(Modality.APPLICATION_MODAL);
-		primaryStage.setResizable(false);//impede que o stage seja redimencionado.
-		primaryStage.show();//apresenta a a primeira janela
+		windowLogin.setResizable(false);//impede que o stage seja redimencionado.
+		windowLogin.show();//apresenta a a primeira janela
 		
 	}
 	
