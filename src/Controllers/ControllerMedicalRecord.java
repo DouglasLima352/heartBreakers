@@ -57,10 +57,10 @@ public class ControllerMedicalRecord{
                 paciente.setResults(result.getString("Results"));
                 patients.add(paciente);
             }
+			
 			System.out.printf("Percorrendo o ArrayList (usando o índice)\n");
 		    int n = patients.size();
 		    for (int i=0; i<n; i++) {
-		      //System.out.printf("Posição %d- %s\n", i, pacientes.get(i));
 		    	System.out.printf( "Posição %d- %s\n", i, patients.get(i) + " , Número do prontuário: " + patients.get(i).getProntuarionNumber());
 		    }
 		} catch (Exception ex) {

@@ -10,6 +10,7 @@ public class Paciente {
 	private String address;
 	private String cell;
 	private String weight;
+	private String height;
 	private String gender;
 	private String blood_type;
 	private String cid;
@@ -100,6 +101,15 @@ public class Paciente {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+    
+  //Height
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
     }
     
     //Gender
