@@ -49,7 +49,7 @@ public class ControllerDoctorLogin {
 			//resultado da consulta
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/heartBreakers/src/View/loginHB.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PacienteHB.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();

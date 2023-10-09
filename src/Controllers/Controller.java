@@ -11,6 +11,7 @@ import java.util.List;
 import dbconnection.Connect;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -75,7 +76,24 @@ public class Controller {
         	    nomePaciente.setFont(new Font("Arial", 20));
         	    PacientesSFiltro.getChildren().add(nomePaciente);
         	    
-        	    
+        	  //foto
+        	    byte[] photoBytes = rs.getBytes("photo");
+        	    if (photoBytes != null) {
+        	        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(photoBytes);
+        	        Image image = new Image(byteArrayInputStream);
+
+        	        ImageView imageView = new ImageView(image);
+        	        imageView.setFitWidth(65.0); // Defina a largura desejada
+        	        imageView.setFitHeight(60.0); // Defina a altura desejada
+        	        imageView.setLayoutX(10.0);
+        	        imageView.setLayoutY(10.0);
+
+        	       
+        	        PacientesSFiltro.getChildren().add(imageView);
+        
+        	    } else {
+        	    	System.out.print("foto indisponivel"); 
+        	    }
         	    
         	    //Número do prontuário ]
         	    Label pontuarioPaciente = new Label();
@@ -92,6 +110,28 @@ public class Controller {
         	    buttonEditar.setPrefWidth(100.0);
         	    buttonEditar.setPrefHeight(30.0);
         	    buttonEditar.setText("Editar");
+        	    buttonEditar.setOnAction(event -> {
+        	        try {
+        	            /*System.out.print("janela aberta");
+        	            Stage prontuarioP = new Stage(); // cria um novo stage
+        	            Parent windowProntuario = FXMLLoader.load(getClass().getResource("/view/ProntuarHB.fxml")); // carrega o arquivo fxml.
+        	            prontuarioP.setTitle("Prontuario do Paciente"); // nomeia a janela.
+        	            prontuarioP.setScene(new Scene(windowProntuario, 600, 400)); // seta o fxml dentro do stage.
+        	            prontuarioP.initModality(Modality.APPLICATION_MODAL); // impede que o stage seja redimensionado.
+        	            prontuarioP.show(); // apresenta a janela Prontuario*/
+        	        	
+        	        	
+        	        	FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHB.fxml"));
+                        Parent root = loader.load();
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+        	        } catch (Exception e) {
+        	            e.printStackTrace();
+        	            System.out.print(e); // caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
+        	        }
+        	    });
         	    buttonEditar.setStyle("-fx-background-color: #9A0019; -fx-text-fill: white;");
         	    PacientesSFiltro.getChildren().add(buttonEditar);
         	    
@@ -108,19 +148,9 @@ public class Controller {
 		}
 	}
 	
-	public void editar(ActionEvent event) {
+	/*public void editar(ActionEvent event) {
 		
-		try {
-			Stage prontuarioP = new Stage();//cria um novo stage
-			Parent windowProntuario = FXMLLoader.load(getClass().getResource("ProntuarHB.fxml"));//carrega o arquivo fxml.
-			prontuarioP.setTitle("Prontuario do Paciente");// nomeia a janela.
-			prontuarioP.setScene(new Scene(windowProntuario, 600, 400));//seta o fxml dentro do stage.
-			prontuarioP.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
-			prontuarioP.show();//apresenta a janela Prontuario
-		} catch (Exception e) {
-			e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
-		}
-	}
+	}*/
 	
 	public void voltar(ActionEvent event) {
 		
