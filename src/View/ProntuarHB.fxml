@@ -19,14 +19,14 @@
    <Font name="Arial Rounded MT Bold" size="16.0" />
 </font>
 </Label>
-<TextArea layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-<ComboBox layoutX="44.0" layoutY="496.0" prefHeight="25.0" prefWidth="192.0" style="-fx-background-color: #ffff;" />
-<TextArea layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
+<TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
+<ComboBox fx:id="exams_solicited" layoutX="44.0" layoutY="496.0" prefHeight="25.0" prefWidth="192.0" style="-fx-background-color: #ffff;" />
+<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
 <Label layoutX="93.0" layoutY="266.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
 <font>
    <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -72,7 +72,7 @@
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button layoutX="188.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE" onAction="#voltar" fx:id="bVoltar">
+<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
@@ -94,14 +94,14 @@
          <Image url="https://sapl.capanema.pr.leg.br/media/sapl/public/parlamentar/16/olinda.jpg.256x256_q85_box-0%2C23%2C735%2C758_crop_detail.jpg" />
       </image>
    </ImageView>
-   <TextField layoutX="123.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
-   <TextField layoutX="123.0" layoutY="115.0" prefHeight="25.0" prefWidth="315.0" style="-fx-background-radius: 5px;" />
-   <TextField layoutX="290.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
-   <TextField layoutX="456.0" layoutY="64.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 5px;" />
-   <ComboBox layoutX="122.0" layoutY="167.0" prefHeight="17.0" prefWidth="150.0" style="-fx-background-color: #ffff; -fx-background-radius: 5px;" />
-   <TextField layoutX="290.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
-   <TextField layoutX="370.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
-   <DatePicker layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
+   <TextField fx:id="name" layoutX="123.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
+   <TextField fx:id="address" layoutX="123.0" layoutY="115.0" prefHeight="25.0" prefWidth="315.0" style="-fx-background-radius: 5px;" />
+   <TextField fx:id="cpf" layoutX="290.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
+   <TextField fx:id="rg" layoutX="456.0" layoutY="64.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 5px;" />
+   <ComboBox fx:id="gender" layoutX="122.0" layoutY="167.0" prefHeight="17.0" prefWidth="150.0" style="-fx-background-color: #ffff; -fx-background-radius: 5px;" />
+   <TextField fx:id="weight" layoutX="290.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
+   <TextField fx:id="height" layoutX="370.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
+   <DatePicker fx:id="birth_date" layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
    <Label layoutX="127.0" layoutY="47.0" text="Nome">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -147,7 +147,7 @@
          <Image url="@logoHB1.png" />
       </image>
    </ImageView>
-   <ComboBox layoutX="456.0" layoutY="167.0" prefHeight="17.0" prefWidth="118.0" style="-fx-background-color: #ffff;" />
+   <ComboBox fx:id="blood_type" layoutX="456.0" layoutY="167.0" prefHeight="17.0" prefWidth="118.0" style="-fx-background-color: #ffff;" />
    <Label layoutX="458.0" layoutY="152.0" text="Tipo Sanguíneo">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -155,7 +155,7 @@
    </Label>
 </children>
 </Pane>
-      <TextField layoutX="45.0" layoutY="554.0" prefHeight="26.0" prefWidth="192.0" />
+      <TextField fx:id="exams_results" layoutX="45.0" layoutY="554.0" prefHeight="26.0" prefWidth="192.0" />
       <Label layoutX="84.0" layoutY="541.0" styleClass="lblC" text="Resultado dos Exames" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
