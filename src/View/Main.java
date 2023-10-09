@@ -16,7 +16,8 @@ public class Main extends Application{
 	    //primaryStage.getIcons().add(new Image("file:resources/images/docs.png"));
 		primaryStage.setScene(new Scene(root, 600, 400));//seta o fxml dentro do stage.
 		//root.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-		//primaryStage.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
+		//primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.setResizable(false);//impede que o stage seja redimencionado.
 		primaryStage.show();//apresenta a a primeira janela
 		
 	}

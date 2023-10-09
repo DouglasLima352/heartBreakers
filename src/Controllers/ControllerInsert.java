@@ -36,19 +36,39 @@ public class ControllerInsert{
 	@FXML
 	private TextField patientFilter;
 	
-	public void voltar(ActionEvent event) {
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+	
+	
+	/*public void salvarVoltar(ActionEvent event) throws SQLException {
 			
 			try {
-				Stage listaP = new Stage();//cria um novo stage
-				Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
-				listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
-				listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
-				listaP.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
-				listaP.show();//apresenta a janela Paciente
-			} catch (Exception e) {
-				e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
+				
+				Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
+				String SQLConnect = "INSERT INTO patient (nome) VALUES (?)";
+				
+				pst = connect.prepareStatement(SQLConnect);
+				rs = pst.executeQuery();
+				
+				if (rs.next()) {
+					Stage listaP = new Stage();//cria um novo stage
+					Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
+					listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
+					listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
+					listaP.setResizable(false);//impede que o stage seja redimencionado.
+					listaP.show();//apresenta a janela Paciente
+				}else {
+					System.out.println("Não foi possível salvar.");
+				}
+				
+				
+			} catch (SQLException e) {
+				//e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
+					// TODO: handle exception
+					System.out.print("catch");
+					e.printStackTrace();
 			}
-		}
+		}*/
 	
 	public void test(ActionEvent event) throws SQLException {
 		try {

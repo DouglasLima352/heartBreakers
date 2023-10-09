@@ -54,6 +54,7 @@ public class ControllerDoctorLogin {
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setResizable(false);//impede que o stage seja redimencionado.
                 stage.show();
 			}else {
 				System.out.println("Login ou senha incorretos.");
