@@ -23,11 +23,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.layout.*;
-
+import javafx.stage.Modality;
 //import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import model.Paciente;//importando a classe paciente 
+import View.Main;
 
 public class Controller {
 	@FXML
@@ -35,6 +36,10 @@ public class Controller {
 	
 	@FXML
 	private AnchorPane ListaPacientes;
+	@FXML
+	private Button bEditar;
+	@FXML
+	private Button bVoltar;
 	
 	public void initialize() throws SQLException {
 		//primeira classe a ser executada assim que a tela é aberta 
@@ -100,6 +105,34 @@ public class Controller {
 			// TODO: handle exception
 			System.out.print("catch");
 			e1.printStackTrace();
+		}
+	}
+	
+	public void editar(ActionEvent event) {
+		
+		try {
+			Stage prontuarioP = new Stage();//cria um novo stage
+			Parent windowProntuario = FXMLLoader.load(getClass().getResource("ProntuarHB.fxml"));//carrega o arquivo fxml.
+			prontuarioP.setTitle("Prontuario do Paciente");// nomeia a janela.
+			prontuarioP.setScene(new Scene(windowProntuario, 600, 400));//seta o fxml dentro do stage.
+			prontuarioP.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
+			prontuarioP.show();//apresenta a janela Prontuario
+		} catch (Exception e) {
+			e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
+		}
+	}
+	
+	public void voltar(ActionEvent event) {
+		
+		try {
+			Stage listaP = new Stage();//cria um novo stage
+			Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
+			listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
+			listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
+			listaP.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
+			listaP.show();//apresenta a janela Paciente
+		} catch (Exception e) {
+			e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
 		}
 	}
 	
