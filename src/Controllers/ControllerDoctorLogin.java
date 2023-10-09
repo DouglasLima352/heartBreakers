@@ -38,28 +38,44 @@ public class ControllerDoctorLogin {
 	ResultSet rs = null;
 	
 	public void loginDoctor (ActionEvent event) {
-		String sql = "select * from doctor where login=? and senha=?";
+		String sql = "select * from doctor where cpf=? and password=?";
 		try {
+			//conexao
+			Connection connect = dbconnection.Connect.fazer_conexao();
 			//preparo pra consulta sql
-			pst = conexao.prepareStatement(sql);
+			pst = connect.prepareStatement(sql);
 			pst.setString(1, txtCpfDoctor.getText());
 			pst.setString(2, txtSenhaDoctor.getText());
 			//resultado da consulta
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/caminho/para/seu/arquivo/FXML.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/heartBreakers/src/View/loginHB.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
 			}else {
-				System.out.print("Deu ruim");
+				System.out.println("Login ou senha incorretos.");
 			}
 		} catch (Exception e) {
 			System.out.print(e);
-		}	
+		}	finally { try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (conexao != null) {
+                conexao.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
+		
+}
 	
 	private void btnLoginActionPerformed(ActionEvent evt) {
         loginDoctor(evt);

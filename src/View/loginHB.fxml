@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerDoctorLogin">
    <children>
       <TextField id="txtCpfDoctor" fx:id="txtCpfDoctor" layoutX="198.0" layoutY="227.0" prefHeight="34.0" prefWidth="203.0" promptText="CPF" style="-fx-background-radius: 10px;" />
       <TextField id="txtSenhaDoctor" fx:id="txtSenhaDoctor" layoutX="198.0" layoutY="283.0" prefHeight="34.0" prefWidth="203.0" promptText="SENHA" style="-fx-background-radius: 10px;" />
@@ -17,7 +17,7 @@
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Label>
-      <Button id="btnLogin" fx:id="btnLogin" onAction="#loginButtonClicked" layoutX="230.0" layoutY="336.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="138.0" style="-fx-background-color: #9A0019; -fx-background-radius: 10px;" text="Entrar" textFill="WHITE">
+    <Button id="btnLogin" fx:id="btnLogin" onAction="#loginDoctor" layoutX="230.0" layoutY="336.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="138.0" style="-fx-background-color: #9A0019; -fx-background-radius: 10px;" text="Entrar" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
