@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="661.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerInsert">
+<AnchorPane prefHeight="661.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerUpdate">
    <children>
  	<Label layoutX="14.0" layoutY="236.0" style="-fx-font-style: #ffff;" text="Prontuário:" textFill="WHITE">
 <font>
