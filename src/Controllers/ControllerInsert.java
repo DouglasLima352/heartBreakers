@@ -39,37 +39,6 @@ public class ControllerInsert{
 	PreparedStatement pst = null;
 	ResultSet rs = null;
 	
-	
-	/*public void salvarVoltar(ActionEvent event) throws SQLException {
-			
-			try {
-				
-				Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
-				String SQLConnect = "INSERT INTO patient (nome) VALUES (?)";
-				
-				pst = connect.prepareStatement(SQLConnect);
-				rs = pst.executeQuery();
-				
-				if (rs.next()) {
-					Stage listaP = new Stage();//cria um novo stage
-					Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
-					listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
-					listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
-					listaP.setResizable(false);//impede que o stage seja redimencionado.
-					listaP.show();//apresenta a janela Paciente
-				}else {
-					System.out.println("Não foi possível salvar.");
-				}
-				
-				
-			} catch (SQLException e) {
-				//e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
-					// TODO: handle exception
-					System.out.print("catch");
-					e.printStackTrace();
-			}
-		}*/
-	
 	public void test(ActionEvent event) throws SQLException {
 		try {
 			Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
@@ -107,6 +76,18 @@ public class ControllerInsert{
 				paciente.setResults(result.getString("results"));
 				pacientes.add(paciente);
 			}
+			
+            String sql = "INSERT INTO patient (photo, name, cpf, rg, birth_date, address, cell, weight, height, gender, blood_type, cid, complaint, disease_history, allergies, conduct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            // Itere pelo ArrayList e insira os dados no banco de dados
+            for (int i = 0; i < pacientes.size(); i++) {
+                preparedStatement.setString(i + 1, dpacientes.get(i)); // +1 porque os índices de PreparedStatement começam em 1
+            }
+
+            // Execute a instrução SQL
+            preparedStatement.executeUpdate();
+			
 			System.out.print("paciente");
 			
 		} catch (SQLException error) {
@@ -116,4 +97,34 @@ public class ControllerInsert{
 		}
 		
 	}
+	
+	public void voltar(ActionEvent event) throws SQLException {
+			
+			try {
+				
+				Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
+				String SQLConnect = "INSERT INTO patient (nome) VALUES (?)";
+				
+				pst = connect.prepareStatement(SQLConnect);
+				rs = pst.executeQuery();
+				
+				if (rs.next()) {
+					Stage listaP = new Stage();//cria um novo stage
+					Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
+					listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
+					listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
+					listaP.setResizable(false);//impede que o stage seja redimencionado.
+					listaP.show();//apresenta a janela Paciente
+				}else {
+					System.out.println("Não foi possível salvar.");
+				}
+				
+				
+			} catch (SQLException e) {
+				//e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
+					// TODO: handle exception
+					System.out.print("catch");
+					e.printStackTrace();
+			}
+		}
 }

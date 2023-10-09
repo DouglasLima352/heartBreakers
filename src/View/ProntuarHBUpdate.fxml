@@ -72,12 +72,12 @@
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
+<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button layoutX="304.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE">
+<Button layoutX="304.0" layoutY="627.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Voltar" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
