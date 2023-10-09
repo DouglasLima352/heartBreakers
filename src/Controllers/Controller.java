@@ -126,6 +126,7 @@ public class Controller {
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
                         stage.show();
         	        } catch (Exception e) {
         	            e.printStackTrace();
