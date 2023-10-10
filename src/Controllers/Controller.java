@@ -77,6 +77,7 @@ public class Controller {
         	    nomePaciente.setLayoutY(10.0);
         	    nomePaciente.setFont(new Font("Arial", 20));
         	    PacientesSFiltro.getChildren().add(nomePaciente);
+        	    String namepaciente = rs.getString("name");
         	    
         	  //foto
         	    byte[] photoBytes = rs.getBytes("photo");
@@ -104,6 +105,7 @@ public class Controller {
         	    pontuarioPaciente.setLayoutY(40.0);
         	    pontuarioPaciente.setFont(new Font("Arial", 16));
         	    PacientesSFiltro.getChildren().add(pontuarioPaciente);
+        	    int idPaciente = rs.getInt("medical_record");
         	    
         	    //botão editar 
         	    Button buttonEditar = new Button();
@@ -113,21 +115,25 @@ public class Controller {
         	    buttonEditar.setPrefHeight(30.0);
         	    buttonEditar.setText("Editar");
         	    buttonEditar.setOnAction(event -> {
-        	        try {
-        	        	Stage currentStage = (Stage) buttonEditar.getScene().getWindow();
-        	            currentStage.close(); // 
-        	        	
-        	        	FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHB.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.setResizable(false);//impede que o stage seja redimencionado.
-                        stage.show();
-        	        } catch (Exception e) {
-        	            e.printStackTrace();
-        	            System.out.print(e); // caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
-        	        }
+        	    	try {
+        	    	    Stage currentStage = (Stage) buttonEditar.getScene().getWindow();
+        	    	    currentStage.close();
+
+        	    	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHBUpdate.fxml"));
+        	    	    loader.setController(new ControllerUpdate(idPaciente));
+        	    	    Parent root = loader.load();
+        	    	    
+        	    	    Stage stage = new Stage();
+        	    	    stage.setTitle("Prontuário: " + namepaciente);
+        	    	    stage.setScene(new Scene(root, 600, 700));
+        	    	    stage.setResizable(false);
+        	    	    stage.show();
+
+        	    	} catch (Exception e) {
+        	    	    e.printStackTrace();
+        	    	    System.out.print(e);
+        	    	}
+
         	    });
         	    buttonEditar.setStyle("-fx-background-color: #9A0019; -fx-text-fill: white;");
         	    PacientesSFiltro.getChildren().add(buttonEditar);
@@ -162,20 +168,6 @@ public class Controller {
         }
 	}
 	
-	/*public void voltar(ActionEvent event) {
-		
-		try {
-			Stage listaP = new Stage();//cria um novo stage
-			Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
-			listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
-			listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
-			listaP.initModality(Modality.APPLICATION_MODAL);//impede que o stage seja redimencionado.
-			listaP.show();//apresenta a janela Paciente
-		} catch (Exception e) {
-			e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.
-		}
-	}*/
-	
 	//classe para fechar a tela - sair 
 	public void closePaciente(ActionEvent event) {
 
@@ -189,8 +181,6 @@ public class Controller {
 		try {
 			Connection con = dbconnection.Connect.fazer_conexao();
 			
-			List<Paciente> pacientes = new ArrayList<>();
-			
 			String sql = "select * from patient where name=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
@@ -203,12 +193,21 @@ public class Controller {
 			Double heightpane = 80.0;
 			if(rs.next()) {
 				while (rs.next()) {
-	            	Pane PacientesSFiltro = new Pane();
+					Pane PacientesSFiltro = new Pane();
 	        	    PacientesSFiltro.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
 	        	    PacientesSFiltro.setLayoutY(layoutYPane);
 	        	    PacientesSFiltro.setPrefWidth(widthPane);
 	        	    PacientesSFiltro.setPrefHeight(heightpane);
 	        	    PacientesSFiltro.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-alignment: center; -fx-position: absolute");
+	        	    
+	        	    //Nome
+	        	    Label nomePaciente = new Label();
+	        	    nomePaciente.setText("Nome: " + rs.getString("name"));
+	        	    nomePaciente.setLayoutX(84.0);
+	        	    nomePaciente.setLayoutY(10.0);
+	        	    nomePaciente.setFont(new Font("Arial", 20));
+	        	    PacientesSFiltro.getChildren().add(nomePaciente);
+	        	    String namepaciente = rs.getString("name");
 	        	    
 	        	  //foto
 	        	    byte[] photoBytes = rs.getBytes("photo");
@@ -229,15 +228,6 @@ public class Controller {
 	        	    	System.out.print("foto indisponivel"); 
 	        	    }
 	        	    
-	        	    //Nome
-	        	    Label nomePaciente = new Label();
-	        	    nomePaciente.setText("Nome: " + rs.getString("name"));
-	        	    nomePaciente.setLayoutX(84.0);
-	        	    nomePaciente.setLayoutY(10.0);
-	        	    nomePaciente.setFont(new Font("Arial", 20));
-	        	    PacientesSFiltro.getChildren().add(nomePaciente);
-	        	    
-	        	    
 	        	    //Número do prontuário ]
 	        	    Label pontuarioPaciente = new Label();
 	        	    pontuarioPaciente.setText("Nº prontuário: " + rs.getString("medical_record"));
@@ -245,6 +235,7 @@ public class Controller {
 	        	    pontuarioPaciente.setLayoutY(40.0);
 	        	    pontuarioPaciente.setFont(new Font("Arial", 16));
 	        	    PacientesSFiltro.getChildren().add(pontuarioPaciente);
+	        	    int idPaciente = rs.getInt("medical_record");
 	        	    
 	        	    //botão editar 
 	        	    Button buttonEditar = new Button();
@@ -256,15 +247,17 @@ public class Controller {
 	        	    buttonEditar.setOnAction(e -> {
 	        	        try {
 	        	        	Stage currentStage = (Stage) buttonEditar.getScene().getWindow();
-	        	            currentStage.close(); // 
-	        	        	
-	        	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHBUpdate.fxml"));
-	        	            Parent root = loader.load();
-	        	            Scene scene = new Scene(root);
-	        	            Stage stage = new Stage();
-	        	            stage.setScene(scene);
-	        	            stage.setResizable(false);
-	        	            stage.show();
+	        	    	    currentStage.close();
+
+	        	    	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHBUpdate.fxml"));
+	        	    	    loader.setController(new ControllerUpdate(idPaciente));
+	        	    	    Parent root = loader.load();
+	        	    	    
+	        	    	    Stage stage = new Stage();
+	        	    	    stage.setTitle("Prontuário: " + namepaciente);
+	        	    	    stage.setScene(new Scene(root, 600, 700));
+	        	    	    stage.setResizable(false);
+	        	    	    stage.show();
 	        	        } catch (Exception ex) {
 	        	            ex.printStackTrace();
 	        	            System.out.println(ex);

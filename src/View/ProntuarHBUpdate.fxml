@@ -11,25 +11,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="661.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerInsert">
+<AnchorPane prefHeight="661.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
- 	<Label layoutX="14.0" layoutY="236.0" style="-fx-font-style: #ffff;" text="Prontuário:" textFill="WHITE">
-<font>
-   <Font name="Arial Rounded MT Bold" size="16.0" />
-</font>
-</Label>
-<TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
-<Label layoutX="93.0" layoutY="266.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
-<font>
-   <Font name="Arial Rounded MT Bold" size="12.0" />
-</font>
-</Label>
+ 	<Label fx:id="lblprontuario" layoutX="14.0" layoutY="236.0" style="-fx-font-style: #ffff;" text="Prontuário:" textFill="WHITE">
+		<font>
+		   <Font name="Arial Rounded MT Bold" size="16.0" />
+		</font>
+	</Label>
+	<TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
+	<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
+	<Label layoutX="93.0" layoutY="266.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
+		<font>
+		   <Font name="Arial Rounded MT Bold" size="12.0" />
+		</font>
+	</Label>
 <Label layoutX="116.0" layoutY="340.0" styleClass="lblC" text="Alergias" textFill="WHITE">
 <font>
    <Font name="Arial Rounded MT Bold" size="12.0" />
