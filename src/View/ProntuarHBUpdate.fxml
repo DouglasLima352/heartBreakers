@@ -74,7 +74,7 @@
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button fx:id="bEditar" layoutX="247.0" layoutY="621.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Voltar" textFill="WHITE">
+<Button fx:id="bEditar" layoutX="247.0" layoutY="621.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Voltar" textFill="WHITE" onAction="#voltar">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>

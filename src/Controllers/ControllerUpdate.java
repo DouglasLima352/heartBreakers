@@ -96,7 +96,8 @@ public class ControllerUpdate {
   	private TextArea diagnosis;
   	@FXML 
   	private Button deletePaciente;
-  	
+  	@FXML
+  	private Button bVoltar;
 
     public ControllerUpdate(int id) {
         this.id = id;
@@ -310,6 +311,7 @@ public class ControllerUpdate {
 	    if (arquivoSelecionado != null) {
 		    try {
 		    	examFile = Files.readAllBytes(arquivoSelecionado.toPath());
+		    	exams_results.setText(arquivoSelecionado.getAbsolutePath());
 		        System.out.print(examFile);
 		    } catch (IOException e) {
 		        System.err.println("erro");
@@ -347,5 +349,24 @@ public class ControllerUpdate {
 	        
 		}
     	
+    }
+    
+    public void voltar(ActionEvent event) {
+    	try {
+    		Stage currentStage = (Stage) bVoltar.getScene().getWindow();
+    	    currentStage.close();
+
+    	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PacienteHB.fxml"));
+    	    Parent root = loader.load();
+    	    
+    	    Stage stage = new Stage();
+    	    stage.setTitle("Lista de pacientes: ");
+    	    stage.setScene(new Scene(root, 600, 400));
+    	    stage.setResizable(false);
+    	    stage.show();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(e);
+		}
     }
 }
