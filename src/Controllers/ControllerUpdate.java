@@ -118,6 +118,7 @@ public class ControllerUpdate {
         	    	System.out.print("foto indisponivel"); 
         	    }
                 
+                
                 String pacienteName = rs.getString("name");
                 name.setText(pacienteName);
                 
@@ -235,7 +236,7 @@ public class ControllerUpdate {
     	
     	try {
     		Connection con = Connect.fazer_conexao();
-    		String sql = "UPDATE patient SET name= ?, cpf=?, rg=?, birth_date=?, address=?, weight=?, height=?, gender=?, blood_type=?, cid=?, complaint=?, disease_history=?, allergies=?, conduct=?, physical_state=?, diagnostic_hypothesis=?, results=?, photo=? WHERE medical_record = ?";
+    		String sql = "UPDATE patient SET name= ?, cpf=?, rg=?, birth_date=?, address=?, weight=?, height=?, gender=?, blood_type=?, cid=?, complaint=?, disease_history=?, allergies=?, conduct=?, physical_state=?, diagnostic_hypothesis=?, results=?, photo=?, exams=? WHERE medical_record = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nameUpdate);
             stmt.setInt(2, cpfUpdateInt);
@@ -255,7 +256,8 @@ public class ControllerUpdate {
             stmt.setString(16, diagnostic_hypothesisUpdate);
             stmt.setString(17, diagnosisUpdate);
             stmt.setBytes(18, imageBytes);
-            stmt.setInt(19, id);
+            stmt.setBytes(19, examFile);
+            stmt.setInt(20, id);
             int rs = stmt.executeUpdate();
             
             System.out.print("Salvar");
@@ -284,6 +286,7 @@ public class ControllerUpdate {
 		    try {
 		        imageBytes = Files.readAllBytes(novaImage.toPath());
 		        System.out.print(imageBytes);
+		        
 		    } catch (IOException e) {
 		        System.err.println("erro");
 		    }
