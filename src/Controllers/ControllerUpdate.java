@@ -1,6 +1,9 @@
 package Controllers;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import dbconnection.Connect;
 
 public class ControllerUpdate {
@@ -38,6 +42,9 @@ public class ControllerUpdate {
     private String conductUpdate;
     private String diagnostic_hypothesisUpdate;
     private String diagnosisUpdate;
+    private byte[] imageBytes;
+    private byte[] examFile;
+ 
 
     @FXML
     private Label lblprontuario;
@@ -61,6 +68,8 @@ public class ControllerUpdate {
     private TextField weight;
     @FXML
     private TextField height;
+    @FXML
+    private TextField exams_results;
     
     
     //prontuário 
@@ -167,11 +176,12 @@ public class ControllerUpdate {
                 String diagnosisD = rs.getString("results");
                 diagnosis.setText(diagnosisD);
                 
+               
+                
             }else {
             	System.out.print("Erro de conexão");
             }
-        	//quero colocar um campo de texto para que o código bytecode apareça qunado o usuário selecionar a f
-
+            
             // Fechar conexões
             rs.close();
             stmt.close();
@@ -225,7 +235,7 @@ public class ControllerUpdate {
     	
     	try {
     		Connection con = Connect.fazer_conexao();
-    		String sql = "UPDATE patient SET name= ?, cpf=?, rg=?, birth_date=?, address=?, weight=?, height=?, gender=?, blood_type=?, cid=?, complaint=?, disease_history=?, allergies=?, conduct=?, physical_state=?, diagnostic_hypothesis=?, results=?  WHERE medical_record = ?";
+    		String sql = "UPDATE patient SET name= ?, cpf=?, rg=?, birth_date=?, address=?, weight=?, height=?, gender=?, blood_type=?, cid=?, complaint=?, disease_history=?, allergies=?, conduct=?, physical_state=?, diagnostic_hypothesis=?, results=?, photo=? WHERE medical_record = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nameUpdate);
             stmt.setInt(2, cpfUpdateInt);
@@ -244,7 +254,8 @@ public class ControllerUpdate {
             stmt.setString(15, physical_examUpdate);
             stmt.setString(16, diagnostic_hypothesisUpdate);
             stmt.setString(17, diagnosisUpdate);
-            stmt.setInt(18, id);
+            stmt.setBytes(18, imageBytes);
+            stmt.setInt(19, id);
             int rs = stmt.executeUpdate();
             
             System.out.print("Salvar");
@@ -259,6 +270,40 @@ public class ControllerUpdate {
 			// TODO: handle exception
 			System.out.print(e);
 			
+		}
+    }
+
+    public void trocarFoto(ActionEvent event) {
+    	System.out.print("Trocar foto");
+    	FileChooser selecionarArquivo = new FileChooser();//cria a instancia do FileChooser
+    	selecionarArquivo.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagens", "*.png", "JPG", "*.jpg", "JPEG", "*.jpeg"));
+    	selecionarArquivo.setTitle("Selecione uma nova foto"); //titulo da janela que vai abrir
+    	File novaImage = selecionarArquivo.showOpenDialog(null);
+    	
+    	if (novaImage != null) {
+		    try {
+		        imageBytes = Files.readAllBytes(novaImage.toPath());
+		        System.out.print(imageBytes);
+		    } catch (IOException e) {
+		        System.err.println("erro");
+		    }
+		}
+    }
+    public void trocarArquivo(ActionEvent event) {
+    	System.out.print("Trocar arquivo");
+    	FileChooser selecionarArquivo = new FileChooser();//cria a instancia do FileChooser
+		selecionarArquivo.setTitle("Selecione um arquivo"); //titulo da janela que vai abrir
+		selecionarArquivo.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("ArquivosPDF", "*.pdf")      
+        );
+	    File arquivoSelecionado = selecionarArquivo.showOpenDialog(null);
+	    if (arquivoSelecionado != null) {
+		    try {
+		    	examFile = Files.readAllBytes(arquivoSelecionado.toPath());
+		        System.out.print(examFile);
+		    } catch (IOException e) {
+		        System.err.println("erro");
+		    }
 		}
     }
 }
