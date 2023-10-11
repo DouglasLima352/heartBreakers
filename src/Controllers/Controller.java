@@ -51,8 +51,6 @@ public class Controller {
 		try {
 			Connection con = dbconnection.Connect.fazer_conexao();
 			
-			List<Paciente> pacientes = new ArrayList<>();
-			
 			String sql = "select * from patient";
 			PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -64,7 +62,7 @@ public class Controller {
 			
             while (rs.next()) {
             	Pane PacientesSFiltro = new Pane();
-        	    PacientesSFiltro.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
+        	    PacientesSFiltro.setLayoutX(layoutXPane);
         	    PacientesSFiltro.setLayoutY(layoutYPane);
         	    PacientesSFiltro.setPrefWidth(widthPane);
         	    PacientesSFiltro.setPrefHeight(heightpane);
@@ -86,8 +84,8 @@ public class Controller {
         	        Image image = new Image(byteArrayInputStream);
 
         	        ImageView imageView = new ImageView(image);
-        	        imageView.setFitWidth(65.0); // Defina a largura desejada
-        	        imageView.setFitHeight(60.0); // Defina a altura desejada
+        	        imageView.setFitWidth(65.0); 
+        	        imageView.setFitHeight(60.0);
         	        imageView.setLayoutX(10.0);
         	        imageView.setLayoutY(10.0);
 
@@ -145,7 +143,6 @@ public class Controller {
         	    System.out.print(layoutXPane + layoutYPane + widthPane + heightpane);
             };
 		} catch (SQLException e1) {
-			// TODO: handle exception
 			System.out.print("catch");
 			e1.printStackTrace();
 		}
@@ -177,23 +174,27 @@ public class Controller {
 	}
 	//botoão para pesquisar 
 	public void FilterPaciente(ActionEvent event) throws SQLException {
-		ListaPacientes.getChildren().clear();//limpa todos os itens que estavam no container 
+		ListaPacientes.getChildren().clear();
+		String nameFilter = filterPaciente.getText();
 		try {
 			Connection con = dbconnection.Connect.fazer_conexao();
-			
 			String sql = "select * from patient where name=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			
-			stmt.setString(1, filterPaciente.getText());
+			stmt.setString(1, nameFilter);
             ResultSet rs = stmt.executeQuery();
-			
+            
             Double layoutXPane = 50.0;
 			Double layoutYPane = 14.0;
 			Double widthPane = 500.0;
 			Double heightpane = 80.0;
 			if(rs.next()) {
-				while (rs.next()) {
-					Pane PacientesSFiltro = new Pane();
+				System.out.println("Pacientes encontrado");
+				do {
+					int pacienten = 1;
+					System.out.println("paciente "+ pacienten);
+					pacienten = pacienten + 1;
+					
+	            	Pane PacientesSFiltro = new Pane();
 	        	    PacientesSFiltro.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
 	        	    PacientesSFiltro.setLayoutY(layoutYPane);
 	        	    PacientesSFiltro.setPrefWidth(widthPane);
@@ -208,6 +209,7 @@ public class Controller {
 	        	    nomePaciente.setFont(new Font("Arial", 20));
 	        	    PacientesSFiltro.getChildren().add(nomePaciente);
 	        	    String namepaciente = rs.getString("name");
+	        	    System.out.println("paciente: "+ rs.getString("name"));
 	        	    
 	        	  //foto
 	        	    byte[] photoBytes = rs.getBytes("photo");
@@ -216,8 +218,8 @@ public class Controller {
 	        	        Image image = new Image(byteArrayInputStream);
 
 	        	        ImageView imageView = new ImageView(image);
-	        	        imageView.setFitWidth(65.0); // Defina a largura desejada
-	        	        imageView.setFitHeight(60.0); // Defina a altura desejada
+	        	        imageView.setFitWidth(65.0);
+	        	        imageView.setFitHeight(60.0);
 	        	        imageView.setLayoutX(10.0);
 	        	        imageView.setLayoutY(10.0);
 
@@ -245,8 +247,8 @@ public class Controller {
 	        	    buttonEditar.setPrefHeight(30.0);
 	        	    buttonEditar.setText("Editar");
 	        	    buttonEditar.setOnAction(e -> {
-	        	        try {
-	        	        	Stage currentStage = (Stage) buttonEditar.getScene().getWindow();
+	        	    	try {
+	        	    	    Stage currentStage = (Stage) buttonEditar.getScene().getWindow();
 	        	    	    currentStage.close();
 
 	        	    	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProntuarHBUpdate.fxml"));
@@ -258,10 +260,11 @@ public class Controller {
 	        	    	    stage.setScene(new Scene(root, 600, 700));
 	        	    	    stage.setResizable(false);
 	        	    	    stage.show();
-	        	        } catch (Exception ex) {
-	        	            ex.printStackTrace();
-	        	            System.out.println(ex);
-	        	        }
+
+	        	    	} catch (Exception ex) {
+	        	    	    System.out.print(ex);
+	        	    	}
+
 	        	    });
 	        	    buttonEditar.setStyle("-fx-background-color: #9A0019; -fx-text-fill: white;");
 	        	    PacientesSFiltro.getChildren().add(buttonEditar);
@@ -271,24 +274,11 @@ public class Controller {
 	        	    
 	        	    layoutYPane = layoutYPane + 90.0;
 	        	    System.out.print(layoutXPane + layoutYPane + widthPane + heightpane);
-	            };
+				} while (rs.next());
 			}else {
-				System.out.println("Nenhum paciente encontrado");
-				Pane PacientesSFiltro = new Pane();
-        	    PacientesSFiltro.setLayoutX(layoutXPane);  // Usando o layoutXPane para posicionar horizontalmente
-        	    PacientesSFiltro.setLayoutY(layoutYPane);
-        	    PacientesSFiltro.setPrefWidth(widthPane);
-        	    PacientesSFiltro.setPrefHeight(heightpane);
-        	    PacientesSFiltro.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-alignment: center; -fx-position: absolute");
-        	    
-        	    //Nome
-        	    Label nomePaciente = new Label();
-        	    nomePaciente.setText("Nehum paciente encontrado");
-        	    nomePaciente.setLayoutX(84.0);
-        	    nomePaciente.setLayoutY(10.0);
-        	    nomePaciente.setFont(new Font("Arial", 20));
-        	    PacientesSFiltro.getChildren().add(nomePaciente);
+				System.out.println("Paciente não encontrado");
 			}
+			
             
 		} catch (SQLException e1) {
 			// TODO: handle exception
@@ -296,5 +286,6 @@ public class Controller {
 			e1.printStackTrace();
 		}
 	}
+
 }
 

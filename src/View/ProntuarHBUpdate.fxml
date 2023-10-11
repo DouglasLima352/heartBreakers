@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -18,13 +17,13 @@
 		   <Font name="Arial Rounded MT Bold" size="16.0" />
 		</font>
 	</Label>
-	<TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-	<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
+	<TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" wrapText="true" />
+	<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" wrapText="true" />
 	<Label layoutX="93.0" layoutY="266.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
 		<font>
 		   <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -60,7 +59,7 @@
    <Font name="Arial Rounded MT Bold" size="12.0" />
 </font>
 </Label>
-<Label layoutX="83.0" layoutY="481.0" styleClass="lblC" text="Exames Solicitados" textFill="WHITE">
+<Label layoutX="71.0" layoutY="483.0" styleClass="lblC" text="hipótese de diagnóstico" textFill="WHITE">
 <font>
    <Font name="Arial Rounded MT Bold" size="12.0" />
 </font>
@@ -70,7 +69,7 @@
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
+<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE" onAction="#salvar">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
@@ -80,6 +79,13 @@
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
+      <TextField fx:id="exams_results" layoutX="45.0" layoutY="554.0" prefHeight="26.0" prefWidth="192.0" />
+      <Label layoutX="84.0" layoutY="541.0" styleClass="lblC" text="Resultado dos Exames" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="diagnostic_hypothesis" layoutX="44.0" layoutY="498.0" prefHeight="25.0" prefWidth="192.0" wrapText="true" />
 <Pane prefHeight="229.0" prefWidth="600.0" style="-fx-background-color: #d9d9d9;">
 <children>
    <Label layoutX="20.0" layoutY="14.0" text="Ficha do Paciente:">
@@ -87,11 +93,16 @@
          <Font name="Arial Rounded MT Bold" size="15.0" />
       </font>
    </Label>
-   <ImageView fitHeight="106.0" fitWidth="98.0" layoutX="11.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="photo" fitHeight="88.0" fitWidth="88.0" layoutX="21.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #00000">
       <image>
-         <Image url="https://sapl.capanema.pr.leg.br/media/sapl/public/parlamentar/16/olinda.jpg.256x256_q85_box-0%2C23%2C735%2C758_crop_detail.jpg" />
+         
       </image>
    </ImageView>
+   <Label layoutX="127.0" layoutY="47.0" text="Nome">
+      <font>
+         <Font name="Arial Rounded MT Bold" size="12.0" />
+      </font>
+   </Label>
    <TextField fx:id="name" layoutX="123.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
    <TextField fx:id="address" layoutX="123.0" layoutY="115.0" prefHeight="25.0" prefWidth="315.0" style="-fx-background-radius: 5px;" />
    <TextField fx:id="cpf" layoutX="290.0" layoutY="64.0" style="-fx-background-radius: 5px;" />
@@ -99,11 +110,6 @@
    <TextField fx:id="weight" layoutX="290.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
    <TextField fx:id="height" layoutX="370.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
    <DatePicker fx:id="birth_date" layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
-   <Label layoutX="127.0" layoutY="47.0" text="Nome">
-      <font>
-         <Font name="Arial Rounded MT Bold" size="12.0" />
-      </font>
-   </Label>
    <Label layoutX="290.0" layoutY="47.0" text="CPF">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -139,27 +145,20 @@
          <Font name="Arial Rounded MT Bold" size="12.0" />
       </font>
    </Label>
-   <ImageView fitHeight="42.0" fitWidth="57.0" layoutX="539.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@logoHB1.png" />
-      </image>
-   </ImageView>
    <Label layoutX="458.0" layoutY="152.0" text="Tipo Sanguíneo">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
       </font>
    </Label>
-            <TextField fx:id="name1" layoutX="123.0" layoutY="167.0" style="-fx-background-radius: 5px;" />
-            <TextField fx:id="name2" layoutX="456.0" layoutY="167.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5px;" />
+            <TextField fx:id="gender" layoutX="123.0" layoutY="167.0" style="-fx-background-radius: 5px; " />
+            <TextField fx:id="TipoSanguineo" layoutX="456.0" layoutY="167.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5px;" />
+            <Button fx:id="bVoltar1" layoutX="18.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #9A0019;" text="Trocar foto" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="10.0" />
+               </font>
+            </Button>
 </children>
 </Pane>
-      <TextField fx:id="exams_results" layoutX="45.0" layoutY="554.0" prefHeight="26.0" prefWidth="192.0" />
-      <Label layoutX="84.0" layoutY="541.0" styleClass="lblC" text="Resultado dos Exames" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="diagnosis1" layoutX="44.0" layoutY="498.0" prefHeight="25.0" prefWidth="192.0" />
       
    </children>
 </AnchorPane>
