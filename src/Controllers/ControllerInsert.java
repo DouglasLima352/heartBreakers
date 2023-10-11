@@ -2,14 +2,16 @@ package Controllers;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 import dbconnection.Connect;
 
@@ -20,8 +22,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +39,29 @@ import javafx.stage.Stage;
 import model.Paciente;//importando a classe paciente 
 
 public class ControllerInsert{
+	private int id;
+	private String nameInsert;
+	private int rgInsertInt;
+	private int cpfInsertInt;
+	private Date birthDateFormatedInsert;
+	private String addressInsert;
+	private Float weightInsertValue;
+	private Float heightInsertValue;
+	private String genderInsert;
+	private String bloodTypeInsert;
+	private String cidInsert;
+	private String complaintInsert;
+	private String diseaseHistoryInsert;
+	private String allergiesInsert;
+	private String conductInsert;
+	private String physicalStateInsert;
+	private String diagnosticHypothesisInsert;
+	private String examsInsert;
+	private String resultsInsert;
+    private byte[] imageBytes;
+    private byte[] examFile;
+	
+	
 	@FXML
 	private Button bVoltar;
 	
@@ -42,16 +70,76 @@ public class ControllerInsert{
 	
 	@FXML
 	private Button bAnexar;
+	
+	@FXML
+    private ImageView photo;
 
 	@FXML
 	private TextField pastaSelecionada;
 	
-	PreparedStatement pst = null;
-	ResultSet rs = null;
+	@FXML
+	private TextField name;
+
+	@FXML
+	private TextField cpf;
+
+	@FXML
+	private TextField rg;
+
+	@FXML
+	private DatePicker birthDate;
+
+	@FXML
+	private TextField address;
+
+	@FXML
+	private TextField cell;
+
+	@FXML
+	private TextField weight;
+
+	@FXML
+	private TextField height;
+
+	@FXML
+	private TextField gender;
+	
+	@FXML
+	private TextField bloodType;
+
+	@FXML
+	private TextArea cid;
+
+	@FXML
+	private TextArea complaint;
+	
+	@FXML
+	private TextArea diseaseHistory;
+
+	@FXML
+	private TextArea allergies;
+
+	@FXML
+	private TextArea conduct;
+	
+	@FXML
+	private TextArea physicalState;
+
+	@FXML
+	private TextArea diagnosticHypothesis;
+
+	@FXML
+	private TextField exams;
+	
+	@FXML
+	private TextField results;
 	
 	public void bChooser(ActionEvent event) {
 		FileChooser selecionarArquivo = new FileChooser();//cria a instancia do FileChooser
 		selecionarArquivo.setTitle("Selecione um arquivo"); //titulo da janela que vai abrir
+		selecionarArquivo.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("ArquivosPDF", "*.pdf")
+				);
 	    File arquivoSelecionado = selecionarArquivo.showOpenDialog(null);
 	    if (arquivoSelecionado != null) {
 	        System.out.println("Arquivo selecionado: " + arquivoSelecionado.getAbsolutePath());
@@ -61,82 +149,156 @@ public class ControllerInsert{
 	    }
 	}
 	
+	public ControllerInsert() {
+        //this.id = id;
+    }
+	
+    public void initialize() {
+        try {
+            Connection con = Connect.fazer_conexao();
+
+            String sql = "SELECT * FROM patient";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            //stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+            
+            if (result.next()) {
+            	//Ficha do paciente
+            	byte[] photoBytes = result.getBytes("photo");
+            	//Exibindo
+                if (photoBytes != null) {
+                	ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(photoBytes);
+                	Image image = new Image(byteArrayInputStream); 
+                	photo.setImage(image);
+        	    } else {
+        	    	System.out.print("foto indisponivel"); 
+        	    }
+                
+                String pacienteName = result.getString("name");
+                name.setText(pacienteName);
+                
+                String pacienteAddress = result.getString("address");
+                address.setText(pacienteAddress);
+                
+                int pacienteCPF = result.getInt("cpf");
+                String pacienteCPFString = Integer.toString(pacienteCPF);
+                cpf.setText(pacienteCPFString);
+                
+                int pacienteRG = result.getInt("rg");
+                String pacienteRGString = String.valueOf(pacienteRG);
+                rg.setText(pacienteRGString);
+                
+                Date pacienteDateBird = result.getDate("birth_date");
+                LocalDate pacienteDateBirdLocalDate = pacienteDateBird.toLocalDate();  //Converte para o formato local de data
+                birthDate.setValue(pacienteDateBirdLocalDate);
+                
+                String pacienteSexo = result.getString("gender");
+                gender.setText(pacienteSexo);
+                
+                Float pacientePeso = result.getFloat("weight"); 
+                String pacientePesoString = Float.toString(pacientePeso);
+                weight.setText(pacientePesoString);
+                
+                Float pacienteAltura = result.getFloat("height"); 
+                String pacienteAlturaString = Float.toString(pacienteAltura);
+                height.setText(pacienteAlturaString);
+                
+                String pacienteTipoSanguineo = result.getString("blood_type"); 
+                bloodType.setText(pacienteTipoSanguineo);
+                
+                //prontuário 
+                String queixaPrincipal = result.getString("complaint");
+                complaint.setText(queixaPrincipal);
+                
+                String historico = result.getString("disease_history");
+                diseaseHistory.setText(historico);
+                
+                String alergias = result.getString("allergies");
+                allergies.setText(alergias);
+                
+                String cidPc = result.getString("cid");
+                cid.setText(cidPc);
+                
+                String physical_state = result.getString("physical_state");
+                physicalState.setText(physical_state);
+                
+                String conductD = result.getString("conduct");
+                conduct.setText(conductD);
+                
+                String diagnostic_hypothesisD = result.getString("diagnostic_hypothesis");
+                diagnosticHypothesis.setText(diagnostic_hypothesisD);
+                
+                String diagnosisD = result.getString("exams");
+                exams.setText(diagnosisD);
+                
+                String resultsD = result.getString("results");
+                results.setText(resultsD);
+                
+            }else {
+            	System.out.print("Erro de conexão");
+            }
+
+            result.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }       
+	
 	public void salvar (ActionEvent event) {
-	    Connection connect = null;
-	    PreparedStatement stmt = null;
-
+		
 	    try {
-	        List<Paciente> pacientes = new ArrayList<>();
-
-	        connect = dbconnection.Connect.fazer_conexao(); // Conectando ao banco de dados
-	        /*String SQLConnect = "SELECT * FROM patient WHERE name = ?";
-	        stmt = connect.prepareStatement(SQLConnect);
-
-	        stmt.setString(1, name.getText());
-	        ResultSet result = stmt.executeQuery();*/
-	        
-	        Paciente paciente = new Paciente();
-
-            paciente.setPhoto(getString("photo"));
-            paciente.setName(getString("name"));
-            paciente.setCPF(getString("cpf"));
-		    paciente.setRG(getString("rg"));
-		    paciente.setBirthDate(getString("birth_date"));
-		    paciente.setAddress(getString("address"));
-		    paciente.setCell(getString("cell"));
-		    paciente.setWeight(getString("weight"));
-		    paciente.setHeight(getString("height"));
-		    paciente.setGender(getString("gender"));
-		    paciente.setBloodType(getString("blood_type"));
-		    paciente.setCid(getString("cid"));
-		    paciente.setComplaint(getString("complaint"));
-		    paciente.setDiseaseHistory(getString("disease_history"));
-		    paciente.setAllergies(getString("allergies"));
-		    paciente.setConduct(getString("conduct"));
-		    paciente.setPhysicalState(getString("physical_state"));
-		    
-		    pacientes.add(paciente);
-
-	        // Agora, vamos inserir os pacientes na tabela 'patient'
-
-	        String SQLInsert = "INSERT INTO patient (photo, name, cpf, rg, birth_date, address, cell, weight, height, gender, blood_type, cid, complaint, disease_history, allergies, conduct, physical_state, exams, diagnostic_hypothesis, results) " +
-	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-	        stmt = connect.prepareStatement(SQLInsert);
-	        
-	        for (Paciente paciente1 : pacientes) {
-	            // Configure os parâmetros do PreparedStatement com base no tipo de dado correto
-	            stmt.setString(1, paciente1.getPhoto());
-	            stmt.setString(2, paciente1.getName());
-	            stmt.setString(3, paciente1.getCPF());
-	            stmt.setString(4, paciente1.getRG());
-	            stmt.setString(1, paciente1.getPhoto());
-			    stmt.setString(2, paciente1.getName());
-			    stmt.setString(3, paciente1.getCPF());
-			    stmt.setString(4, paciente1.getRG());
-			    stmt.setString(5, paciente1.getBirthDate());
-			    stmt.setString(6, paciente1.getAddress());
-			    stmt.setString(7, paciente1.getCell());
-			    stmt.setString(8, paciente1.getWeight());
-			    stmt.setString(9, paciente1.getHeight());
-			    stmt.setString(10, paciente1.getGender());
-			    stmt.setString(11, paciente1.getBloodType());
-			    stmt.setString(12, paciente1.getCid());
-			    stmt.setString(13, paciente1.getComplaint());
-			    stmt.setString(14, paciente1.getDiseaseHistory());
-			    stmt.setString(15, paciente1.getAllergies());
-			    stmt.setString(16, paciente1.getConduct());
-			    stmt.setString(17, paciente1.getPhysicalState());
-			    stmt.setString(18, paciente1.getExams());
-			    stmt.setString(19, paciente1.getDiagnosticHypothesis());
-			    stmt.setString(20, paciente1.getResults());
-
-	            // Execute a instrução SQL para inserir o paciente
-	            stmt.executeUpdate();
-	            stmt.close();
-	            connect.close();
-	        }
-
+	    	nameInsert = name.getText();
+	    	String cpfInsert = cpf.getText();
+	    	cpfInsertInt = Integer.parseInt(cpfInsert);
+	    	String rgInsert = rg.getText();
+	    	rgInsertInt = Integer.parseInt(rgInsert);
+	    	LocalDate birthDateInsert = birthDate.getValue();
+	    	birthDateFormatedInsert = Date.valueOf(birthDateInsert);
+	    	addressInsert = address.getText();
+	    	String weightInsert = weight.getText();
+	    	weightInsertValue = Float.valueOf(weightInsert);
+	    	String heightInsert = weight.getText();
+	    	heightInsertValue = Float.valueOf(heightInsert);
+	    	genderInsert = gender.getText();
+	    	bloodTypeInsert = bloodType.getText();
+	    	cidInsert = cid.getText();
+	    	complaintInsert = complaint.getText();
+	    	diseaseHistoryInsert = diseaseHistory.getText();
+	    	allergiesInsert = allergies.getText();
+	    	conductInsert = conduct.getText();
+	    	physicalStateInsert = physicalState.getText();
+	    	examsInsert = exams.getText();
+	    	diagnosticHypothesisInsert = diagnosticHypothesis.getText();
+	    	resultsInsert = results.getText();
+	    	
+	    	Connection con = Connect.fazer_conexao();
+	    	String sql = "INSERT INTO patient (name, cpf, rg, birth_date, address, cell, weight, height, gender, blood_type, cid, complaint, disease_history, allergies, conduct, physical_state, exams, diagnostic_hypothesis, results, photo) " +
+		            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    	PreparedStatement stmt = con.prepareStatement(sql);
+	             
+	        stmt.setString(1, nameInsert);
+            stmt.setInt(2, cpfInsertInt);
+            stmt.setInt(3, rgInsertInt);
+            stmt.setDate(4, birthDateFormatedInsert);
+            stmt.setString(5, addressInsert);
+            stmt.setFloat(6, weightInsertValue);
+            stmt.setFloat(7, heightInsertValue);
+            stmt.setString(8, genderInsert);
+            stmt.setString(9, bloodTypeInsert);
+            stmt.setString(10, cidInsert);
+            stmt.setString(11, complaintInsert);
+            stmt.setString(12, diseaseHistoryInsert);
+            stmt.setString(13, allergiesInsert);
+            stmt.setString(14, conductInsert);
+            stmt.setString(15, physicalStateInsert);
+            stmt.setString(15, examsInsert);
+            stmt.setString(16, diagnosticHypothesisInsert);
+            stmt.setString(17, resultsInsert);
+            stmt.setBytes(18, imageBytes);
+            int result = stmt.executeUpdate();
+	      
 	        System.out.println("Inserção bem-sucedida.");
 	        
 	        Stage listaP = new Stage();//cria um novo stage
@@ -147,47 +309,17 @@ public class ControllerInsert{
 			listaP.show();//apresenta a janela Paciente
 	    } catch (SQLException | IOException e) {
 	        e.printStackTrace(); // Exceção
-	    } finally {
-	        // Certifique-se de fechar a conexão e o PreparedStatement
-	        try {
-	            if (stmt != null) {
-	                stmt.close();
-	            }
-	            if (connect != null) {
-	                connect.close();
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
 	}
 
-	
-	private String getString(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	public void voltar(ActionEvent event) {
 			try {
-				/*Connection connect = dbconnection.Connect.fazer_conexao(); //Conectando ao banco db
-				String SQLConnect = "INSERT INTO patient (nome) VALUES (?)";
-				
-				pst = connect.prepareStatement(SQLConnect);
-				rs = pst.executeQuery();*/
-				
-				if (rs.next()) {
-					Stage listaP = new Stage();//cria um novo stage
-					Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
-					listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
-					listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
-					listaP.setResizable(false);//impede que o stage seja redimencionado.
-					listaP.show();//apresenta a janela Paciente
-				}else {
-					System.out.println("Não foi possível salvar.");
-				}
-				
+				Stage listaP = new Stage();//cria um novo stage
+				Parent windowPaciente = FXMLLoader.load(getClass().getResource("PacienteHB.fxml"));//carrega o arquivo fxml.
+				listaP.setTitle("Prontuario do Paciente");// nomeia a janela.
+				listaP.setScene(new Scene(windowPaciente, 600, 400));//seta o fxml dentro do stage.
+				listaP.setResizable(false);//impede que o stage seja redimencionado.
+				listaP.show();//apresenta a janela Paciente		
 				
 			} catch (Exception e) {
 				//e.printStackTrace();// caso ocorra algum erro no processo, e.printStackTrace() detalha o que aconteceu.

@@ -19,12 +19,12 @@
 </font>
 </Label>
 <TextArea fx:id="complaint" layoutX="45.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="historic" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="diseaseHistory" layoutX="353.0" layoutY="281.0" prefHeight="42.0" prefWidth="192.0" />
 <TextArea fx:id="allergies" layoutX="45.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
 <TextArea fx:id="cid" layoutX="353.0" layoutY="355.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="physical_exam" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
+<TextArea fx:id="physicalState" layoutX="45.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
 <TextArea fx:id="conduct" layoutX="353.0" layoutY="427.0" prefHeight="42.0" prefWidth="192.0" />
-<TextArea fx:id="diagnosis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
+<TextArea fx:id="diagnosticHypothesis" layoutX="353.0" layoutY="498.0" prefHeight="98.0" prefWidth="192.0" />
 <Label layoutX="93.0" layoutY="266.0" styleClass="lblC" text="Queixa Principal" textFill="WHITE">
 <font>
    <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -98,7 +98,7 @@
    <TextField fx:id="rg" layoutX="456.0" layoutY="64.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 5px;" />
    <TextField fx:id="weight" layoutX="290.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
    <TextField fx:id="height" layoutX="370.0" layoutY="167.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-radius: 5px;" />
-   <DatePicker fx:id="birth_date" layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
+   <DatePicker fx:id="birthDate" layoutX="456.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
    <Label layoutX="127.0" layoutY="47.0" text="Nome">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
