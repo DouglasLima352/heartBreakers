@@ -64,17 +64,17 @@
    <Font name="Arial Rounded MT Bold" size="12.0" />
 </font>
 </Label>
-<Button fx:id="trocarArquivo" layoutX="97.0" layoutY="588.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="88.0" style="-fx-background-color: #9A0019;" text="Baixar Anexo" textFill="WHITE" onAction="#trocarArquivo">
+<Button fx:id="trocarArquivo" layoutX="97.0" layoutY="588.0" mnemonicParsing="false" onAction="#trocarArquivo" prefHeight="15.0" prefWidth="88.0" style="-fx-background-color: #9A0019;" text="Baixar Anexo" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button fx:id="bVoltar" layoutX="188.0" layoutY="627.0" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
+<Button fx:id="bVoltar" layoutX="125.0" layoutY="621.0" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Salvar" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
 </Button>
-<Button fx:id="bEditar" layoutX="304.0" layoutY="627.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Editar" textFill="WHITE">
+<Button fx:id="bEditar" layoutX="247.0" layoutY="621.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Voltar" textFill="WHITE">
 <font>
    <Font name="Arial Black" size="10.0" />
 </font>
@@ -159,6 +159,11 @@
             </Button>
 </children>
 </Pane>
+      <Button fx:id="deletePaciente" layoutX="368.0" layoutY="621.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #9A0019;" text="Excluir" textFill="WHITE" onAction="#deletePaciente">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Button>
       
    </children>
 </AnchorPane>

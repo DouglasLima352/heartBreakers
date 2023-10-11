@@ -13,6 +13,10 @@ import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -20,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import dbconnection.Connect;
 
 public class ControllerUpdate {
@@ -89,6 +94,8 @@ public class ControllerUpdate {
   	private TextArea diagnostic_hypothesis;
   	@FXML 
   	private TextArea diagnosis;
+  	@FXML 
+  	private Button deletePaciente;
   	
 
     public ControllerUpdate(int id) {
@@ -308,5 +315,37 @@ public class ControllerUpdate {
 		        System.err.println("erro");
 		    }
 		}
+    }
+    public void deletePaciente(ActionEvent event) {
+    	try {
+    		Connection con = Connect.fazer_conexao();
+    		String sql = "DELETE FROM patient WHERE medical_record= ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int rs = stmt.executeUpdate();
+            if(rs > 0){
+            	System.out.printf("Paciente deletado: "+  nameUpdate);
+            	
+            	Stage currentStage = (Stage) deletePaciente.getScene().getWindow();
+	    	    currentStage.close();
+
+	    	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PacienteHB.fxml"));
+	    	    Parent root = loader.load();
+	    	    
+	    	    Stage stage = new Stage();
+	    	    stage.setTitle("Lista de pacientes: ");
+	    	    stage.setScene(new Scene(root, 600, 400));
+	    	    stage.setResizable(false);
+	    	    stage.show();
+            }else{
+            	System.out.println("Não foi possível alterar os registros!");
+            }
+            
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(e);
+	        
+		}
+    	
     }
 }
